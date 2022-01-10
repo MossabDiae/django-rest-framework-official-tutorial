@@ -9,4 +9,4 @@ urlpatterns = [
 
 # taking the original urlpatterns and generating a new version with taking care of format
 # adding something like this : <URLPattern 'snippets<drf_format_suffix:format>'>
-# urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = format_suffix_patterns(urlpatterns)
