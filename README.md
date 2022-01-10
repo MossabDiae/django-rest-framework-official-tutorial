@@ -23,3 +23,19 @@ class View:
         handler = self.http_method_not_allowed
     return handler(request, *args, **kwargs)
 ```
+
+- when using Mixins 
+``` python
+class SnippetList(mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  generics.GenericAPIView)
+```
+the `ListModelMixin` provides `list()` that can be linked to a GET request:
+``` python
+def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+```
+Now, `list()` is taking care of getting the queryset, making a serializer and giving the response back 
+> return Response(serializer.data)
+
+the reason this is working dynamically is that `GenericAPIView` will provide the mixins with methods such as `.get_object`, `.get_serializer` in the [tutorial](https://www.django-rest-framework.org/tutorial/3-class-based-views/) this was called **core functionality**.
