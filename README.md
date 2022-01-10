@@ -23,3 +23,37 @@ http DELETE http://127.0.0.1:8000/snippets/3/
 # X-Content-Type-Options: nosniff                                                                                                                       
 # X-Frame-Options: DENY
 ```
+
+- A new git trick : use `git log --oneline` to see commits line
+
+After checking that the browsable api was still working after disabling the the multi formats support ,I decided to go back one step to the past . so the commits list was like this :
+``` bash
+git log --oneline
+# 9fcccb8 (HEAD -> 2-requests-and-responses) re-disabled the format support to test if browsable api works
+# dacb714 updated readme
+# 1534d76 adding support for different formats
+```
+want to make a new state based on the dacb714 commit (NOT TO DETACH TO IT BUT TO BRING CHANGES FROM IT) so I did : `git checkout dacb714 .` (if no dot > detach mode)
+
+Indeed `git status` is giving this as if we made changes ourselves:
+``` bash
+$ git status 
+On branch 2-requests-and-responses
+Your branch is ahead of 'origin/2-requests-and-responses' by 3 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   snippets/urls.py
+        modified:   snippets/views.py
+```
+from there just : `git commit -am 'your comment'` and the `git log --oneline` gives now:
+``` bash
+ec0b0ae (HEAD -> 2-requests-and-responses) api still working , back to the future
+9fcccb8 re-disabled the format support to test if browsable api works
+dacb714 updated readme
+1534d76 adding support for different formats
+```
+source of this git trick [here](https://medium.com/swlh/using-git-how-to-go-back-to-a-previous-commit-8579ccc8180f)
+
+Part 2 DONE.
