@@ -39,3 +39,28 @@ Now, `list()` is taking care of getting the queryset, making a serializer and gi
 > return Response(serializer.data)
 
 the reason this is working dynamically is that `GenericAPIView` will provide the mixins with methods such as `.get_object`, `.get_serializer` in the [tutorial](https://www.django-rest-framework.org/tutorial/3-class-based-views/) this was called **core functionality**.
+
+- Finally you can do another level of abstraction and use generic views that have already implemented the definition of get(), post(), delete() .. etc , all you need to provide is a `queryset` and a `serializer` , for e.g this is the implementation of `rest_framework.generics.RetrieveAPIView` which returns one object:
+
+``` python
+class RetrieveAPIView(mixins.RetrieveModelMixin,
+                      GenericAPIView):
+    """
+    Concrete view for retrieving a model instance.
+    """
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+```
+How does it know which object to get while all you're giving in queryset is `queryset = Snippet.objects.all()` ?
+
+the answer inside `rest_framework.mixins.RetrieveModelMixin` :
+``` python
+class RetrieveModelMixin:
+    """
+    Retrieve a model instance.
+    """
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()  #<--- HERE (its definition in GenericAPIView)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+```
