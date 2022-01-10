@@ -2,7 +2,7 @@
 ## Part 3
 
 ### Notes:
-- when rewriting our functions as views that inherit from `APIview` we changed the the check for Http methods for e.g `if request.method == 'GET'` to methods `def get()` , the question that I had was : how does our class knows that it should call the get() method when it has a GET request or post() method when it get a POST request ?
+- when rewriting our functions as views that inherit from `APIview` we changed the check for Http methods for e.g from `if request.method == 'GET'` to methods `def get()` , the question that I had was : how does our class knows that it should call the get() method when it has a GET request or post() method when it get a POST request ?
 
 at first I checked the `APIview`'s source code looking form something as simple as `if request.method == 'GET'` , well little did I know , nothing to be found . Later I found [this](https://stackabuse.com/creating-a-rest-api-with-django-rest-framework#theapiviewclass) article which had the following line :
 > We will be using the APIView class to represent views, which is a **subclass of Django's View class**. This way we get bootstrapped post(), get(), patch()
