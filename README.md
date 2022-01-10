@@ -6,6 +6,7 @@
 
 at first I checked the `APIview`'s source code looking form something as simple as `if request.method == 'GET'` , well little did I know , nothing to be found . Later I found [this](https://stackabuse.com/creating-a-rest-api-with-django-rest-framework#theapiviewclass) article which had the following line :
 > We will be using the APIView class to represent views, which is a **subclass of Django's View class**. This way we get bootstrapped post(), get(), patch()
+
 Aha ! maybe the answer was after all in Django's View class , a peak into [its source code](https://github.com/django/django/blob/ca9872905559026af82000e46cde6f7dedc897b6/django/views/generic/base.py#L93) and indeed , a dispatch method was responsible on checking that (code shortened for clarity).
 ``` python
 class View:
