@@ -1,16 +1,20 @@
 # django rest framework official tutorial 
-## Part 6
+After finished reading and practicing with Django for APIs (by William Vincent) I'm planning to do [the official tutorial](https://www.django-rest-framework.org/tutorial/1-serialization/).
 
-### Notes:
-- So while Class based views provide methods `get() post() put() ..etc` that will be used to determine the the request types accepted by the View, the ViewSets provide **actions** instead and each action ca .
-- Now ViewSets can serve multiple actions (methods) , the link `action <---> request.method` happens at `urls.py` either by extracting (generating) views from ViewSets like this:
-``` python
-snippet_list = SnippetViewSet.as_view({
-    'get': 'list',
-    'post': 'create'
-})
-urlpatterns = [ path('snippets/', snippet_list, name='snippet-list'),]
-```
-or by letting DefaultRouter do it for you.
+### Goals:
+- Better understand drf concepts
+- Getting more familiar with using the Documentation (btw here is a nice [trick](https://www.twitter.com/MossabDiae/status/1470148198278828041))
+- Getting ready for personal projects
 
-1 function view = 1 class view = 1 action of ViewSet 
+### The official tutorial is currently made from 6 parts :
+
+- [x] 1 - Serialization
+- [x] 2 - Requests and responses
+- [x] 3 - Class based views
+- [x] 4 - Authentication and permissions
+- [x] 5 - Relationships and hyperlinked APIs
+- [x] 6 - Viewsets and routers
+
+### How I'm planning to do it :
+
+To avoid deleting code (and potentially good comments) I'll create a new Branche for each part.
